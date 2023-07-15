@@ -1,0 +1,14 @@
+world_rank_grade,university_name,country,teaching_score,international_score,research_score,citations_score,total_score,num_students,student_staff_ratio,international_students,female_male_ratio,year
+2,Wageningen University and Research Center,Netherlands,52.6,70.3,66.9,87.8,83.7,9248,17,21,50,2016
+3,University of Amsterdam,Netherlands,52.2,66.5,64.7,87.4,82.7,24570,14.4,11,47,2016
+3,Utrecht University,Netherlands,48.1,55.8,64.3,88.1,82.3,30779,15.4,7,53,2016
+3,Delft University of Technology,Netherlands,55,84,73.8,61.5,82,15920,19.4,25,26,2016
+3,Leiden University,Netherlands,50.5,64.3,63.1,85.2,81.8,21222,17.1,10,53,2016
+3,Erasmus University Rotterdam,Netherlands,37.2,76.1,55.2,95.6,81.4,20580,18.9,18,42,2016
+3,University of Groningen,Netherlands,43.3,63.9,56.9,84,81.1,24556,25.6,12,46,2016
+4,Maastricht University,Netherlands,37.5,95.5,47.7,82.7,79.6,15626,18.9,48,50,2016
+6,Radboud University Nijmegen,Netherlands,34.3,60.9,48.5,84.9,75.8,17713,13,10,52,2016
+7,University of Twente,Netherlands,34.1,80.1,45.6,68.8,73.3,6631,12,26,37,2016
+7,VU University Amsterdam,Netherlands,28.4,54.9,37.1,90.7,73.1,23280,16.3,6,50,2016
+8,Eindhoven University of Technology,Netherlands,34.3,71.3,41,70.7,70.9,8176,16,14,33,2016
+8,University of Netherlands,Netherlands,25,99.8,26.7,84.8,68,5144,15.9,52,44,2016

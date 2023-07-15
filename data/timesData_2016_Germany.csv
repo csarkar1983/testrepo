@@ -1,0 +1,21 @@
+world_rank_grade,university_name,country,teaching_score,international_score,research_score,citations_score,total_score,num_students,student_staff_ratio,international_students,female_male_ratio,year
+2,LMU Munich,Germany,70.5,62.8,77.4,85.7,85.6,35691,15.5,13,56,2016
+2,Heidelberg University,Germany,68.8,62.8,69.6,88.2,84.8,28881,24.5,17,49,2016
+2,Humboldt University of Berlin,Germany,63.7,62.6,77,73.6,83.6,29987,52.5,16,34,2016
+3,Technical University of Munich,Germany,61,63.8,66,80.1,83.2,35565,31.5,20,33,2016
+3,Free University of Berlin,Germany,57.9,69.2,72.2,60.2,81.3,33062,39.3,20,52,2016
+4,University of Tübingen,Germany,47,58.2,59.8,79.3,80.7,28327,38.9,12,52,2016
+4,University of Freiburg,Germany,47.4,60.3,51.1,80.5,80.1,26467,31.2,16,46,2016
+4,University of Bonn,Germany,45.1,63.6,47.5,85.3,79.1,32474,70.4,13,49,2016
+4,University of Göttingen,Germany,49.3,56.4,54.5,72.7,78.6,25581,25.6,12,45,2016
+5,University of Mannheim,Germany,34.5,64.6,47.7,86.9,77.7,11761,85.8,15,49,2016
+5,RWTH Aachen University,Germany,49.4,54.1,56.3,63.2,77.4,37917,27.6,16,31,2016
+5,University of Erlangen-Nuremberg,Germany,51.7,47,39.7,75.2,76.1,36146,53.9,9,43,2016
+6,University of Münster,Germany,40.3,46.3,44.1,85.6,75.9,39838,46.1,8,47,2016
+6,Karlsruhe Institute of Technology,Germany,37.7,56.7,47.5,73.8,74.5,25294,24.6,16,26,2016
+7,University of Cologne,Germany,42.2,53.1,38,75,72.9,43280,43.4,11,54,2016
+7,TU Dresden,Germany,41.4,47.7,45.8,66.1,72.7,35487,37.4,12,36,2016
+7,University of Konstanz,Germany,38.5,58.3,46.7,61.9,71,10930,59.1,12,48,2016
+8,University of Würzburg,Germany,34.6,50.9,35.8,79.1,69.2,26576,38.4,8,51,2016
+8,Ulm University,Germany,35.2,58.2,23.9,86.4,68.2,9187,11.2,10,41,2016
+8,Charité - Universitätsmedizin Berlin,Germany,37.3,61.1,22.2,83.8,67.6,6853,6.6,16,58,2016

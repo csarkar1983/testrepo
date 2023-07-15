@@ -1,0 +1,9 @@
+world_rank_grade,university_name,country,teaching_score,international_score,research_score,citations_score,total_score,num_students,student_staff_ratio,international_students,female_male_ratio,year
+2,University of Melbourne,Australia,62,87.1,75.5,86.6,85.2,40128,23.7,35,49,2016
+3,Australian National University,Australia,54.7,93.3,77.3,72.3,83.3,14604,19.2,35,46,2016
+3,University of Sydney,Australia,54.3,84.4,68.1,77.5,82.8,41868,20.2,28,51,2016
+3,The University of Queensland,Australia,49.2,89.3,62.8,82.4,82.5,34718,32.7,27,47,2016
+3,Monash University,Australia,48.1,87.6,58.5,73.3,81.2,50882,40.5,36,50,2016
+4,University of New South Wales,Australia,40.7,89.5,53.9,82.1,80.2,38309,25.9,33,41,2016
+5,University of Western Australia,Australia,33.4,92.6,46.1,83.6,77.5,20851,20.7,27,44,2016
+6,University of Adelaide,Australia,32.8,85.1,43.2,72.4,73.5,20771,30.1,26,42,2016
