@@ -1,212 +1,245 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<!-- Load d3-annotation -->
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>CS498 DDV Final D3.js Visualization - Stanley Lee</title>
-	<meta name="author" content="Stanley Lee" />
-	<meta name="description" content="fullPage full-screen backgrounds." />
-	<meta name="keywords"  content="fullpage,jquery,demo,screen,fullscreen,backgrounds,full-screen" />
-	<meta name="Resource-type" content="Document" />
-
-	<link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
-	<link rel="stylesheet" type="text/css" href="css/slides.css" />
-	<link rel="stylesheet" type="text/css" href="css/bubble_chart.css" />
-	<link rel="stylesheet" type="text/css" href="css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="css/zoomable_sunburst.css" />
-	<link rel="stylesheet" type="text/css" href="css/linechart.css" />
-	<link rel="stylesheet" type="text/css" href="css/annotations.css" />
-
-	<link href='https://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css'>
-
-	<!--[if IE]>
-		<script type="text/javascript">
-			 var console = { log: function() {} };
-		</script>
-	<![endif]-->
-
-	<!-- import d3.v3 -->
-	<script type="text/javascript" src="js/d3.v3.js"></script>
-
-	<!-- import fullPage -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jquery.fullPage.js"></script>
-
-	<!-- import d3.v4 -->
-	<script type="text/javascript" src="js/d3.min.js"></script>
-	<script type="text/javascript" src="js/d3-annotation.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#fullpage').fullpage({
-				verticalCentered: false,
-				anchors: ['intro', 'datavis', 'yelpdata', 'reviews', 'top25', 'checkins', 'findings', 'ref'],
-				navigation: true,
-				navigationPosition: 'right',
-				navigationTooltips: ['Introduction', '​About the Visualization', 'Yelp Dataset', 'Reviews Overview', 'Top 25 Categories', 'NV Checkins', 
-					'Findings', 'References']
-			});});
-	</script>
-
+    <title>University Analysis</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
-<body>
-<div id="fullpage">
-	<div class="section" id="title">
-		<div id="title_text">
-			<h1>Diving into the Restaunt Business</h1>
-			<h3>a d3.js data visualization project using the Yelp Academic dataset<br />Stanley Lee - UIUC CS498 Data Visualization</h3>
-		</div>
-	</div>
-	<div class="section" id="about">
-		<div id="content_div">
-			<h1>About the Visualization</h1>
-			<p>This visualization is an interactive slideshow which takes the user through the Dataset of the 9th Round of the Yelp Academic 
-				Dataset Challenge. The dataset itself contains the Yelp reviews and aggregated check-ins over time of 144 thousand businesses 
-				located throughout various metropolitans across the globe. This visualization focuses on the data from the United States which 
-				includes the following cities: Pittsburgh, Charlotte, Urbana-Champaign, Phoenix, Las Vegas, Madison, Cleveland.</p>
-			<h2>Recommended Settings</h2>
-			<p>As the visualizations use a preset static canvas of 1024x768 pixels, the viewing size of the interactive visualization is at 
-				least 1280x800 pixels to accommodate the surrounding text and scene elements.</p>
-			<h2>Managing the Dataset</h2>
-			<p>With such a large dataset, creating a visualization with the raw data turned out to be very difficult. The first step for created 
-				this visualization was to process the dataset and focus on the data pertaining restaurants in the United States only.</p>
-			<h2>Templates Scene</h2>
-			<p>The use of CSS and FullPage.js allows for a cohesive template look for the interactive visualization. Each page is transitioned 
-				using the same method and text elements are kept the same (font size and family). Additionally there is a page navigation bar 
-				on the right side which allows users to skip between different slides. The tooltips which are triggered when a user moves their 
-				mouse over the navigation alters the display parameters for each navigation menu item.</p>
-			<h2>Annotations</h2>
-			<p>Annotations have been used in all three visualizations with a similar process of using triggers to change the hidden paramenter of 
-				the annotation. For example, the Line Chart Visualization has an initial state of the hidden parameter which controls the display 
-				of the annotations set to false. As a user uses the brush bar to trigger changes to the line chart visualization x-axis 
-				parameters, it also changes this hidden parameter to true. In turn the annotations disappear until the user resets the brush bar 
-				to zero - thus zooming out back to the default visualization parameters.</p>
-			<h2>Parameters and Triggers</h2>
-			<p>Both parameters and triggers are used in all of the three visualizations. For the Bubble Chart Visualization, parameters for the 
-				x,y co-ordinates of each bubble are set to an initial central position for the All Reviews Visualization. As a user selects menu 
-				items to chose between All Reviews, Reviews by State and Reviews by Stars, it triggers the change of bubble’s x,y co-ordinates 
-				parameter to their respective groupings.</p><br />
-			<p>In Zoomable Sunburst Visualization, each mouse click on a region is a trigger for the path and arc parameters. By clicking within 
-				a region, you can zoom into the data to take a look at the information underneath. Clicking the centre circle will trigger the 
-				parameters to return to its values one up in the hierarchy.</p><br />
-			<p>For Line Chart Visualization, parameters are set for each Restaurant Category. These parameters are triggered to be updated as the 
-				mouse moves over the visualization, providing the user with a snapshot of the amount of check-ins in a given time. A secondary 
-				parameter and trigger set is the brush bar below the line chart. This bar allows the user to zoom into the data to show a closer 
-				look of the data. By clicking a set space on the brush bar, it triggers the x-axis parameter of the line chart to be updated to a 
-				ratio of the same selected section of the brush bar.</p>
-		</div>
-	</div>
-	<div class="section" id="survey">
-		<div id="content_div">
-			<h1>The Yelp Dataset</h1>
-			<p>​​The restaurant business is an enormous industry where understanding your clients and their behavioural patterns may give prospective 
-				new restaurant owners a much needed head start. This interactive slideshow dives into the publicly available Yelp Academic Dataset 
-				which includes a large set of reviews client interactions across multiple industries and regions. We will focus on restaurants within 
-				the United States in order to better understand client interactions.</p><br />
-			<p>Assumptions are made in the positive correlation between the number of reviews and the popularity of a business. This is then tied with 
-				the assumption of the positive correlation between number of check-ins and the popularity of a business. By focusing on restaurants 
-				which have large number of reviews, check-ins and high star rating, we will be able to understand the type of restaurant to invest 
-				into.</p>
-		</div>
-	</div>
-	<div class="section" id="background_bw">
-		<div id="bubble_title"><h1>Overview of All Reviewed Restaurants</h1></div>
-		<div id="bubble_content">
-			<div id="bubble_text">
-				<p>​We are able to see that the bulk of the reviews are from NV with a star rating between 2-4.</p>
-			</div>
-			<div id="bubble_container">
-				<div id="toolbar">
-					<a href="#" id="all" class="button active">All Reviews</a>
-					<a href="#" id="state" class="button">Reviews By State</a>
-					<a href="#" id="stars" class="button">Reviews By Average Star Ratings</a>
-				</div>
-				<div id="vis"></div>
-			</div>
-		</div>
-	</div>	
-	<div class="section" id="background_bw">
-		<div id="zsb_title"><h1>Top 25 Most Reviewed Restaurants</h1></div>
-		<div id="zsb_content">
-			<div id="zsb_text">
-				<p>​When the categories are consolidated into the Top 24 + Others, we can see that American New is the most reviewed restaurant 
-					category. The spread between states do not seem to affect the ranking of restaurant categories either.</p>
-			</div>
-			<div id="zsb_container">
-				<div id="zoomable_sunburst"></div>
-			</div>
-		</div>
-	</div>	
-	<div class="section" id="background_bw">
-		<div id="linechart_title"><h1>Customer Checkins per Hour per Category</h1></div>
-		<div id="linechart_content">
-			<div id="linechart_text">
-				<p>Aggregating the hourly check-ins per restaurant categories for NV reveals a consistent trend. Regardless of the day of the week, 
-					there is a cyclic relationship between the number of check-ins and the time of the day. The amount of check-ins peaks out near 
-					the end of the day with a general increase over the weekend.</p>
-			</div>
-			<div id="linechart_container">
-				<div id="linechart"></div>
-			</div>
-		</div>
-	</div>
-	<div class="section" id="analytics">
-		<div id="content_div">
-			<h1>Findings</h1>
-			<p>​The initial analysis based on the Yelp Academic Dataset shows that a prospective restaurant owner should choose to open an 
-				<span id="emphasize">American New</span> styled restaurant. The location should be in <span id="emphasize">NV</span> where 
-				there were the most amount of reviews logged. The restaurant should focus of the <span id="emphasize">evening</span> and 
-				<span id="emphasize">weekend</span> crowds with possibly reducing staffing during the day as the amount of people tapers off.</p>
-		</div>
-	</div>	
-	<div class="section" id="acks">
-		<div id="acks_div">
-			<h1>References and Resources</h1>
-			<h2>Github Project</h2>
-			<ul>
-				<li><a href='https://github.com/stanleykylee/cs498-ddv-final' target='_blank'>CS498 DDV Final Project</a></li>
-			</ul>
-			<h2>Dataset</h2>
-			<ul>
-				<li><a href='https://www.yelp.com/academic_dataset' target='_blank'>Yelp Academic Dataset Round 9</a></li>
-			</ul>
-			<h2>Stock Images</h2>
-			<ul>
-				<li><a href='https://www.pexels.com/photo/analytics-text-185576/' target='_blank'>Pexels - Analytics</a></li>
-				<li><a href='https://www.pexels.com/photo/store-with-red-and-white-stripe-awnings-492803/' target='_blank'
-					>Pexels - Store with Awnings</a></li>
-				<li><a href='https://www.pexels.com/photo/person-answering-test-paper-159353/' target='_blank'>Pexels - Answering Test Paper</a></li>
-				<li><a href='https://www.pexels.com/photo/tea-coffee-restaurant-smartphone-481021/' target='_blank'>Pexels - Tea Coffee Restaunt</a></li>
-				<li><a href='https://www.pexels.com/photo/wood-texture-background-pine-82256/' target='_blank'>Pexels - Wood Texture Background</a></li>
-				<li><a href='https://www.pexels.com/photo/lunch-vegetables-healthy-meal-8844/' target='_blank'>Pexels - Healthy Meal</a></li>
-			</ul>
-			<h2>Bubble Chart</h2>
-			<ul>
-				<li><a href='https://bl.ocks.org/john-guerra/0d81ccfd24578d5d563c55e785b3b40a' target='_blank'>
-					Bubble Chart d3 v4 Github Gist by John Alexis Guerra Gomez</a></li>
-				<li><a href='https://github.com/vlandham/bubble_chart_v4' target='_blank'>Animated Bubble Chart by Jim Vallandingham</a></li>
-				<li><a href='https://github.com/d3/d3-hierarchy/blob/master/README.md#pack' target='_blank'>d3 API documents on d3-hierarchy - packs</a></li>
-			</ul>
-			<h2>Zoomable Sunburst</h2>
-			<ul>
-				<li><a href='https://gist.github.com/mchelen/1481545d38d0304b4d54' target='_blank'>d3.js hierarchical object from csv by Mike Chelen</a></li>
-				<li><a href='https://gist.github.com/mbostock/4348373' target='_blank'>Zoomable Sunburst by Mike Bostock</a></li>
-				<li><a href='https://gist.github.com/denjn5/3b74baf5edc4ac93d5e487136481c601' target='_blank'>
-					Smooth Updates and Sorting by David Richards</a></li>
-			</ul>
-			<h2>Line Chart</h2>
-			<ul>
-				<li><a href='https://gist.github.com/DStruths/9c042e3a6b66048b5bd4' target='_blank'>
-					d3.js Multi-series line chart interactive by DStruths</a></li>
-			</ul>
-		</div>
-	</div>
-</div>
 
-<script type="text/javascript" src="js/tooltip.js"></script>
-<script type="text/javascript" src="js/bubble_chart.js"></script>
-<script type="text/javascript" src="js/zoomable_sunburst.js"></script> 
-<script type="text/javascript" src="js/linechart.js"></script>
-<script type="text/javascript" src="js/annotations.js"></script> 
+<body onload="load1(); load8(); load2(); load9(); load10(); load11(); load12();">
+    <div class="bgImgCenter">
+        <h1 id="intro">University Analysis based 2016 data</h1>
+    
+        <span class="italic">By Chanchal Sarkar - UIUC CS 416 - Summer 2023</span>
+        <!--<img src="car.png" alt="car" width="240" height="120">-->
+        <h3>
+            We know that there are many factors that can make impact on the university ranking. 
+            As a data science student we will do the analysis to find out the factors which affect the world ranking of 
+            the universities all over the world. (See:
+            <a href="https://studylink.com/international-study-advice/university-rankings-explained/" style="color: blue;">Link</a>) 
+            We will analize with the data for 2016 and top universities all over the world.
+        </h3>
+        <div class="banner">
+            <ul>
+                <li>
+                    <a href="#one" class="contents">Find out top five countries with top 200 ranking universities?</a>
+                </li>
+                <li>
+                    <a href="#two" class="contents">Explore top 5 countries to get the name of top 3 universities.</a>
+                </li>
+                <li>
+                    <a href="#three" class="contents">Find out the correlation between factors which have impact on total score?</a>
+                </li>
+                <li>
+                    <a href="#four" class="contents">Do Female/Male ratio has impact on world ranking?</a>
+                </li>
+            </ul>
+        </div>
+        <hr>
+    </div>
+    <div class="bgImgCenter1">
+        <div class="banner">
+        <a href="#two" class="back">Next</a>
+        <h2 id="one">Find out top five countries with top 200 ranking universities?</h2>
+        <p>Now we will see the top 5 countries having most top 200 world ranking universities. In this bar chart,
+            there is a blue dotted line which has been placed as a segrigator of top 5 countries. The y-axis contains
+            the country name and the x-axis contains the total number of university of the country. If you place the 
+            mouse on each country bar, you can get the university count. Further we will do the analysis for top 5 
+            countries to get the best 3 universities of each country.</p>
+        </div>
+        <!--<div id="scene1"></div>-->
+        <svg id="scene1" width=850 height=500>
+            <text x="270" y="100" class="caption" stroke="#0000FF">Top 5 Countries by Best University Count</text>
+    
+            <line x1="260" y1="0" x2="260" y2="490" stroke="blue" stroke-dasharray="4" />
+        </svg>
+    </div>
+    <br>
+    <div class="bgImgCenter2">
+        <div class="banner">
+        <a href="#three" class="back">Next</a>
+        <h2 id="two">Explore top 5 countries to get the name of top 3 universities.</h2>
+        <p>From the previous chart we know that USA, UK, Germany, Neatherland and Australia has the most 
+            top 200 universities. Let's explore each top 5 countries by changing the dropdown in the Select 
+            Country dropdown list. If you place the mouse on each university bar, you can get the university's 
+            total score. The x-axis contains the university name and the x-axis contains the total score of 
+            the university. Further we will do the analysis for the correlations of different factors 
+            on the total score.</p>
+        
+        <br>
 
+        <div>
+            <label for="dropdownYear"><b>Select Country:</b></label>
+            <select id="dropdownYear" style="width: 120px;" onchange="handleSelectChange(event)">
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+                <option value="Germany">Germany</option>
+                <option value="Neatherland">Neatherland</option>
+                <option value="Australia">Australia</option>
+            </select>
+        </div>
+        </div>
+
+        <svg id="scene8" width=1050 height=820></svg>
+    
+    </div>
+
+    <div class="banner">
+        <a href="#four" class="back">Next</a>
+        <h2 id="three">Find out the correlation between factors which have impact on total score?</h2>
+        <p> Now we are going to do further analysis on 4 factors like - teaching score, research score, citation score
+            and international student percentage. These 4 factors may or may not have impact on total score. Let's 
+            find out the correlation. If you place the mouse on each dot in the scatter plot, you can get the 
+            group of countries with larger circle and other countries fadded. Also you will get the university name 
+            if you hover the mouse on a dot. The x-axis contains the total score and the y-axis contains the 
+            teaching score. In the next sceane we will analize another important factor "Female percentage",
+            and will check the correlation with world ranking.
+        </p>
+        <br>
+        
+        <svg id="scene9" width="500" height="400">
+            <line x1="390" y1="0" x2="-10" y2="400" stroke="blue" stroke-dasharray="4" />
+        </svg>
+        <svg id="scene10" width="500" height="400">
+            <line x1="400" y1="0" x2="-10" y2="400" stroke="blue" stroke-dasharray="4" />
+        </svg>
+
+        <svg id="scene11" width="500" height="400"></svg>
+        <svg id="scene12" width="500" height="400"></svg>
+        <br>
+        
+        <br>
+
+    </div>
+
+
+    
+
+    <hr>
+    
+
+    <div class="bgImgCenter3">
+        <a href="#intro" class="back">Back to Top</a>
+        <a href="#three" class="back">Previous</a>
+        <a href="#observation" class="back">Next</a>
+
+        <h2 id="four">Do female percentage has impact on world ranking?</h2>
+        <p>Let's analize the impact of female percentage on world ranking. The world ranking has divided into 8 
+            categories. Hover over each world ranking category in the legend to better understand the trend. The 
+            x-axis is referring to the female percentage.
+        </p>
+
+        <svg id="scene2" width=1050 height=350>
+            <text x="30" y="220" class="caption" stroke="#0000FF">World Ranking Category</text>
+        </svg>
+        
+
+        <script src="university.js"></script>
+
+    </div>
+    <hr>
+
+    <a href="#intro" class="back">Back to Top</a>
+    <a href="#four" class="back">Previous</a>
+    <a href="#five" class="back">Next</a>
+    <h2 id="observation">Observations:</h2>
+    <p>
+        From this narative visualization we can see USA, UK, Germany, Neatherland and Australia has the most 
+        top ranking universities. We identified that California Institute of Technology, Stanford University, 
+        MassachusettsInstitute of Technology are the top 3 universities in USA. University of Oxford, 
+        University ofCambridge, Imperial CollegeLondon are the top 3 universities in UK. LMU Munich, 
+        HeidelbergUniversity, Humboldt University ofBerlin are the top 3 universities in Germany. 
+        Wageningen University and ResearchCenter, University ofAmsterdam, UtrechtUniversity are the top 3 
+        universities in Neatherland and University of Melbourne, AustralianNational University, 
+        University ofSydney are the top 3 universities in Australia.
+        <br><br>
+        We can clearly see that there is a positive correlation between teaching score and total score. Also there 
+        is a positive correlation between research score and total score. But there is no correlation between 
+        citation score and international student percentage. So we can conclude teaching score and research score 
+        are important factor for the better ranking of the university. But citation score and international student 
+        percentage has no relation with the total score.
+        </p>
+
+    <hr>
+    <a href="#intro" class="back">Back to Top</a>
+    <a href="#observation" class="back">Previous</a>
+    <h2 id="five">About this Visualization</h2>
+    <p>
+        This is a narrative visualization created for the CS 416 Data Visualization course. Overview: The 
+        above visualization utilizes the interactive slideshow narrative visualization technique, while 
+        incorporating hybrid elements of the drill-down technique. Each slide contains guidance on how to 
+        interact with the visualization. The structure of the slides guides users from one idea to the next, 
+        but there is still room for individual exploration at each stage. We accomplish visual consistency by 
+        maintaining uniform elements throughout, introducing a mixture of text, image and chart elements, 
+        and having meaningful colors.
+
+        <br><br>
+
+        This visualization assignment asks to find out top 5 countries with best world ranking universities and 
+        figure out the best 5 university name. Also what are the factors which are correlated with best world 
+        ranking. While I was working on an apache superset dashboard project, I was planning to create a D3 
+        visualization project to address the question in a story fashion for the viewers.
+
+        <br><br>
+
+        For example, teaching score and research score is very important for a world ranking but citation and 
+        international student percentage is that much important. To show the correlation I have created a scatter 
+        plot and pointed out the +ve correlation.
+    </p>
+
+    <h3>Scenes</h3>
+    <p>
+        The scenes themselves are constructed via HTML id tags. Each scene has a unique id that is linked via the buttons.The “Next/Previous”
+        buttons allow users to navigate from scene to scene independently, but the structure helps guide the overall narrative.
+        Each scene is composed of a unique chart that highlights its own distinct message.
+    </p>
+    <h3>Annotations</h3>
+    <p>
+        Annotations remain consistent on the charts, even throughout changes triggered by the interactions. This allows the user
+        to have some grounding on the overall message the visualization is trying to communicate. For example, the annotation
+        about a relatively good gas mileage stays consistent throughout the vis transformation from highway mileage to city
+        mileage. This can help a user better understand which car makes consistently have good mileage across both parameters.
+    </p>
+    <h3>Parameters</h3>
+    <p>
+        The visualizations have a handful of relevant parameters that help the user better explore the data. By interacting with
+        JavaScript input features, such as the toggle buttons or the interactive legend in vis2, the user can choose to see
+        data about a specific category, or even filter out the datapoints by hovering over world rank categories.
+        The user input is used as a parameter that controls what the visualization portrays.
+    </p>
+    <h3>Triggers</h3>
+    <p>
+        The triggers are implemented via events and callbacks, such as “mouseover”, “mouseout” and "onChange". When specific html elements
+        experience these events, the callback function is invoked, and we can change the visualization with respect to the
+        action indicated by the trigger. The example triggers we have here are the buttons and hovering legend.
+    </p>
+    <hr>
+
+    <p>
+        <a href="#intro" class="back">Back to Top</a>
+
+        <h2>Acknowledgements</h2>
+        <p>Listed here are the various sources I used for learning about D3. Elements of this visualization are drawn from the
+            examples cited below.
+        </p>
+        <ul>
+            <li>
+                <a href="https://csarkar1983.github.io/testrepo/data/timesData_2016.csv">Data Source</a>
+            </li>
+            <li>
+                <a href="https://d3-graph-gallery.com/graph/interactivity_tooltip.html">Tooltips</a>
+            </li>
+            <li>
+                <a href="https://d3-graph-gallery.com/graph/custom_annotation.html">Annotations</a>
+            </li>
+            <li>
+                <a href="https://www.d3-graph-gallery.com/graph/bubble_template.html">Opacity change on hover</a>
+            </li>
+        </ul>
+    </p>
 </body>
+
 </html>
